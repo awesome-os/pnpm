@@ -1,0 +1,132 @@
+# yaml-language-server: $schema=https://json.schemastore.org/pnpm-workspace.json
+allowBuilds:
+  '@parcel/watcher': false
+  core-js: false
+  esbuild: true
+  fuse-native: true
+  ghooks: true
+  msgpackr-extract: true
+  unrs-resolver: true
+
+auditConfig:
+  ignoreGhsas:
+    - GHSA-2g4f-4pwh-qvx6
+    - GHSA-76c9-3jph-rj3q
+    - GHSA-ffrw-9mx8-89p8
+    - GHSA-mh29-5h37-fv8m
+    - GHSA-w5hq-g745-h8pq
+    # GHSA-vwc7-r8mq-g2x9: adm-zip follows pre-existing destination symlinks during
+    # extraction. No patched adm-zip release exists. It is only a devDependency of
+    # @pnpm/fetching.binary-fetcher, used to build zip fixtures, and never extracts.
+    - GHSA-vwc7-r8mq-g2x9
+    # GHSA-vfj7-8cjw-p6xm: braces stack exhaustion on deeply nested patterns.
+    # No patched braces release exists. pnpm expands patterns from the user's config
+    # and command line, or from scripts and manifests of dependencies already allowed
+    # to run code, so a crash gives an attacker nothing new.
+    - GHSA-vfj7-8cjw-p6xm
+    # GHSA-hp3w-g68c-fv3c: sprintf-js DoS through unbounded precision specifiers.
+    # No patched release exists. It is reached only through argparse 1, which
+    # formats its own help text with it, never attacker-controlled formats.
+    - GHSA-hp3w-g68c-fv3c
+    # GHSA-fc5q-39xc-vjpf: picomatch ReDoS through single-branch repeated
+    # extglobs. No patched release exists upstream; patched locally via
+    # .config/pnpm/patches/picomatch@2.3.2.patch and picomatch@4.0.7.patch.
+    - GHSA-fc5q-39xc-vjpf
+    # GHSA-gcqx-w48m-w2h4: deepmerge mergeObject() prototype poisoning of returned
+    # objects. No patched release exists upstream; patched locally via
+    # .config/pnpm/patches/deepmerge@4.3.1.patch.
+    - GHSA-gcqx-w48m-w2h4
+    # GHSA-g3hv-75wg-m249: minimatch pattern amplification DoS. The fix ships only
+    # in minimatch 11, which glob 11 and 13 cannot use. The upstream fix is patched
+    # locally into minimatch 10 and the copy bundled in glob 13 via
+    # .config/pnpm/patches/minimatch@10.2.6.patch and glob@13.0.7.patch.
+    # minimatch 3 and 5 lack the vulnerable code.
+    - GHSA-g3hv-75wg-m249
+    # GHSA-3g3m-2fjr-6pw4: glob keeps walking directories after its AbortSignal
+    # fires. The fix ships in glob 13.0.7 and 14.0.2, and is patched locally into
+    # glob 11 via .config/pnpm/patches/glob@11.1.0.patch.
+    - GHSA-3g3m-2fjr-6pw4
+
+minimumReleaseAge: 1440 # At least a day
+
+minimumReleaseAgeExclude:
+  - '@pnpm/*'
+  - '@zkochan/*'
+  - better-path-resolve
+  - can-link
+  - can-write-to-dir
+  - cmd-extension
+  - dir-is-case-sensitive
+  - '@esbuild/*'
+  - glob@11.1.0
+  - is-subdir
+  - make-empty-dir
+  - normalize-registry-url
+  - path-absolute
+  - path-temp
+  - pnpm
+  - preferred-pm
+  - promise-share
+  - read-ini-file
+  - read-yaml-file
+  - realpath-missing
+  - rename-overwrite
+  - root-link-target
+  - safe-execa
+  - symlink-dir
+  - which-pm
+  - write-yaml-file
+
+minimumReleaseAgeExcludePrune: true
+
+overrides:
+  '@yarnpkg/fslib@2': '3'
+  adm-zip@<0.6.0: ^0.6.0
+  brace-expansion@<5.0.5: '>=5.0.5'
+  clipanion: 3.2.0-rc.6
+  cross-spawn@<7.0.5: '>=7.0.5'
+  diff@<8.0.3: '^8.0.3'
+  glob@>=10.3.7 <=11.0.3: '^11.1.0'
+  handlebars@>=4.0.0 <4.7.9: '>=4.7.9'
+  js-yaml@<3.14.2: '^3.14.2'
+  js-yaml@^4.0.0: '^4.3.2'
+  lodash@<=4.17.23: '>=4.18.0'
+  lodash@>=4.0.0 <=4.17.22: '^4.17.23'
+  minimatch@>=7.0.0 <7.4.7: '^7.4.7'
+  minimatch@>=9.0.0 <10.0.0: '^10.2.4'
+  # CVE-2026-84947: no undici 6 release has the fix. node-gyp 12 only uses
+  # undici's EnvHttpProxyAgent, which undici 7 keeps. undici 7 needs a global
+  # File, which .config/pnpm/patches/node-gyp@12.3.0.patch adds on Node.js 18.
+  node-gyp@12>undici: 'catalog:'
+  request: npm:postman-request@2.88.1-postman.40
+  semver@<7.5.2: 'catalog:'
+  socks@2: 'catalog:'
+  tar@<=7.5.9: '>=7.5.10'
+  tmp@<=0.2.3: '>=0.2.4'
+
+packageExtensions:
+  # Its index.js imports the Jest plugin, which it declares only as a dev dependency.
+  '@pnpm/eslint-config@1100.0.3':
+    dependencies:
+      eslint-plugin-jest: ^29.17.1
+  # The shell's declarations import micromatch's, which it does not depend on.
+  '@yarnpkg/shell':
+    dependencies:
+      '@types/micromatch': ^4.0.10
+
+registries:
+  https://registry.npmjs.org/:
+    scopes:
+      - '@pnpm'
+
+trustPolicy: no-downgrade
+
+trustPolicyExclude:
+  - '@pnpm/*'
+  - pnpm
+  - rxjs@7.8.2
+  - undici-types@6.21.0
+
+trustPolicyExcludePrune: true
+
+trustPolicyIgnoreAfter: 10080 # 1 week

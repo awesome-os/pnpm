@@ -1,0 +1,65 @@
+{
+  "name": "monorepo-root",
+  "private": true,
+  "scripts": {
+    "bump": "node .github/scripts/bump.mjs",
+    "prepare": "node .config/githooks/install.mjs",
+    "lint": "pn spellcheck && pn lint:meta && pn check:versioning && pn lint:ts",
+    "spellcheck": "cspell \"**/*.ts\" \"**/README.md\" \".changeset/*.md\" --no-progress",
+    "lint:prose": "node .github/scripts/lint-prose.mjs",
+    "lint:ts": "eslint \"**/src/**/*.ts\" \"**/test/**/*.ts\" --cache --concurrency auto",
+    "build:pnpm": "cargo build --release --bin pnpm",
+    "build:pnpm:wasm": "node pnpm/wasm/build.mjs",
+    "pack:pnpm:wasm": "node pnpm/wasm/pack.mjs",
+    "build:wasm-runtime-probe": "node pnpm/tasks/ecosystem-e2e/webcontainer/runtime-probe/build.mjs",
+    "ready:rust": "just ready",
+    "test:rust": "node pnpm/scripts/run-rust-tests.mjs",
+    "test:rust-affected": "node pnpm/scripts/test-affected.mjs",
+    "test:rust-smoke": "node pnpm/scripts/run-rust-tests.mjs --profile smoke",
+    "check:rust": "just check",
+    "lint:rust": "just lint",
+    "fix:rust": "just fix",
+    "pre-push:rust": "bash pnpm/scripts/pre-push-rust.sh",
+    "update-manifests": "pn meta-updater && pn install",
+    "meta-updater": "pn exec meta-updater",
+    "lint:meta": "pn meta-updater --test",
+    "check:versioning": "pnpm change check",
+    "check:npm-signing-keys": "node .github/scripts/update-npm-signing-keys.mjs",
+    "update:npm-signing-keys": "node .github/scripts/update-npm-signing-keys.mjs --update",
+    "check:node-release-keys": "node .github/scripts/update-node-release-keys.mjs",
+    "update:node-release-keys": "node .github/scripts/update-node-release-keys.mjs --update",
+    "ci:lint": "pn lint",
+    "ci:rust-test": "just test-pacquet",
+    "ci:pnpr-test": "just test-pnpr",
+    "ci:rust-clippy": "cargo clippy --locked --workspace --all-targets -- -D warnings",
+    "ci:pnpr-auth-clippy": "cargo clippy --locked -p pnpr-auth --all-targets --all-features -- -D warnings",
+    "ci:rust-doc": "cargo doc --no-deps --workspace --document-private-items",
+    "ci:rust-deny": "cargo deny --config .config/deny.toml check",
+    "ci:rust-layers": "cargo run --locked --quiet -p pnpm-crate-layers -- check",
+    "ci:rust-fmt": "node pnpm/scripts/rustfmt.mjs --all -- --check",
+    "ci:toml-fmt": "taplo format --check",
+    "ci:rust-dylint": "node pnpm/scripts/cargo-dylint.mjs --all -- --all-targets --workspace"
+  },
+  "devDependencies": {
+    "@pnpm/eslint-config": "catalog:",
+    "@pnpm/meta-updater": "catalog:",
+    "@types/node": "catalog:",
+    "cspell": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-regexp": "catalog:",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@12.23.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.23.0",
+      "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "26.13.1",
+      "onFail": "download"
+    }
+  }
+}

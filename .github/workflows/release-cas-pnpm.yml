@@ -1,0 +1,98 @@
+name: Release awesome-os CAS pnpm
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            bin: pnpm.exe
+            asset: pnpm-windows-x64.exe
+            lib_src: libpnpm_ffi.dll
+            lib_asset: libpnpm-windows-x64.dll
+            ghost_asset: pnpm-ghost-windows-x64.exe
+            ghost_cc: clang -Os -std=c11 -Wall -Wextra -o dist/pnpm-ghost-windows-x64.exe src/pnpm_ghost_launcher.c
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            bin: pnpm
+            asset: pnpm-linux-x64
+            lib_src: liblibpnpm_ffi.so
+            lib_asset: libpnpm-linux-x64.so
+            ghost_asset: pnpm-ghost-linux-x64
+            ghost_cc: cc -Os -s -std=c11 -Wall -Wextra -o dist/pnpm-ghost-linux-x64 src/pnpm_ghost_launcher.c -ldl
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+            bin: pnpm
+            asset: pnpm-linux-arm64
+            lib_src: liblibpnpm_ffi.so
+            lib_asset: libpnpm-linux-arm64.so
+            ghost_asset: pnpm-ghost-linux-arm64
+            ghost_cc: cc -Os -s -std=c11 -Wall -Wextra -o dist/pnpm-ghost-linux-arm64 src/pnpm_ghost_launcher.c -ldl
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            bin: pnpm
+            asset: pnpm-macos-arm64
+            lib_src: liblibpnpm_ffi.dylib
+            lib_asset: libpnpm-macos-arm64.dylib
+            ghost_asset: pnpm-ghost-macos-arm64
+            ghost_cc: clang -Os -std=c11 -Wall -Wextra -o dist/pnpm-ghost-macos-arm64 src/pnpm_ghost_launcher.c
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - name: Build awesome-os CAS pnpm + libpnpm-ffi
+        run: |
+          cargo build --release --bin pnpm --target ${{ matrix.target }}
+          cargo build --release -p libpnpm-ffi --target ${{ matrix.target }}
+      - name: Build Ghost CAS launcher & stage artifacts
+        shell: bash
+        run: |
+          mkdir -p dist
+          cp "target/${{ matrix.target }}/release/${{ matrix.bin }}" "dist/${{ matrix.asset }}"
+          cp "target/${{ matrix.target }}/release/${{ matrix.lib_src }}" "dist/${{ matrix.lib_asset }}"
+          cp "include/libpnpm.h" "dist/libpnpm.h"
+          ${{ matrix.ghost_cc }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.target }}
+          path: |
+            dist/${{ matrix.asset }}
+            dist/${{ matrix.lib_asset }}
+            dist/${{ matrix.ghost_asset }}
+            dist/libpnpm.h
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Checksums & Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd dist
+          sha256sum * > SHA256SUMS.txt
+          if gh release view "${GITHUB_REF_NAME}" -R "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" * --clobber -R "${{ github.repository }}"
+          else
+            gh release create "${GITHUB_REF_NAME}" * -R "${{ github.repository }}" \
+              --title "${GITHUB_REF_NAME} — awesome-os CAS pnpm" \
+              --notes "Hard-forked Rust pnpm with native B8G_GHOST_CACHE_DIR CAS store, B8G_ABI_MAGIC_V3 libpnpm C-ABI shared library (+ libpnpm.h), tiny Ghost CAS launcher, zero-duplicate browser/runtime governance, and GitHub Releases self-update."
+          fi

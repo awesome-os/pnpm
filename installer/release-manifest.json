@@ -1,0 +1,26 @@
+{
+  "id": "pnpm",
+  "displayName": "Awesome-OS CAS pnpm",
+  "repo": "awesome-os/pnpm",
+  "version": "12.23.0",
+  "kind": "cli-runtime",
+  "binaryName": "pnpm",
+  "description": "CAS-native Rust pnpm v12 + libpnpm C-ABI + Ghost launcher with GitHub Releases self-update",
+  "targets": [
+    "win64",
+    "linux-x64",
+    "linux-arm64",
+    "macos-arm64"
+  ],
+  "casAssets": {
+    "win64": "pnpm-windows-x64.exe",
+    "linux-x64": "pnpm-linux-x64",
+    "linux-arm64": "pnpm-linux-arm64",
+    "macos-arm64": "pnpm-macos-arm64"
+  },
+  "downloadBaseUrl": "https://github.com/awesome-os/pnpm/releases/latest/download",
+  "install": {
+    "windows": "irm https://github.com/awesome-os/pnpm/releases/latest/download/install.ps1 | iex",
+    "posix": "curl -fsSL https://github.com/awesome-os/pnpm/releases/latest/download/install.sh | sh"
+  }
+}

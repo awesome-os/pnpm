@@ -1,0 +1,12 @@
+* @zkochan
+
+# Supply-chain and CI settings, and code that runs on install
+/pnpm-workspace.yaml @zkochan
+/.config/pnpm/policies.yaml @zkochan
+/.config/pnpm/pnpmfile.cjs @zkochan
+/.config/pnpm/patches/ @zkochan
+/.config/pnpm/tasks.yaml @zkochan
+
+# No code owner: pnpm-workspace.yaml lets this file define only the
+# catalog settings and the update settings.
+/.config/pnpm/catalog.yaml

@@ -1,0 +1,80 @@
+# yaml-language-server: $schema=https://json.schemastore.org/pnpm-workspace.json
+catalog:
+  '@emnapi/wasi-threads': 2.2.0
+  '@pnpm/eslint-config': 1100.0.3
+  '@pnpm/meta-updater': 2.0.6
+  '@tybys/wasm-util': 0.10.5
+  # Kept on 22.x to match pnpm's minimum supported Node.js version (>=22.13);
+  # newer majors would type APIs that don't exist on the supported floor.
+  '@types/node': ^22.19.19
+  '@types/picomatch': ^4.0.3
+  '@types/semver': 7.8.0
+  '@typescript/native': npm:typescript@7.0.2
+  '@webcontainer/api': ^1.6.4
+  # @yarnpkg/core 4.9.2 was published with a Yarn `patch:` specifier for its
+  # `got` dependency, which pnpm resolves to a nonexistent local path. The
+  # `@yarnpkg/nm` override keeps its transitive copy on this version too.
+  '@yarnpkg/parsers': 3.1.0
+  '@yarnpkg/pnp': ^4.1.8
+  '@yarnpkg/shell': 4.1.4
+  arg: 5.0.2
+  ci-info: ^4.5.0
+  # cspell 10.x requires Node.js >=22.18.0, above pnpm's supported floor of
+  # Node.js >=22.13.
+  cspell: 9.8.0
+  esbuild: ^0.28.2
+  eslint: ^10.15.0
+  eslint-plugin-regexp: ^3.1.1
+  nm-prune: ^5.0.0
+  # node-gyp 13 (with its nopt 10 and which 7 dependencies) requires Node.js
+  # ^22.22.2 || ^24.15.0 || >=26.0.0, above pnpm's supported floor of >=22.13.
+  node-gyp: ^12.3.0
+  # npm-packlist 11.x requires Node.js ^22.22.2 || ^24.15.0 || >=26.0.0, above
+  # pnpm's supported floor of Node.js >=22.13.
+  npm-packlist: 10.0.4
+  playwright-core: ^1.65.1
+  semver: ^7.8.6
+  socks: ^2.8.11
+  # The TypeScript 6.0 API, for typescript-eslint, which does not support
+  # TypeScript 7.0 yet (https://github.com/typescript-eslint/typescript-eslint/issues/10940).
+  # Its bin is `tsc6`, so `tsc` is the 7.x compiler from '@typescript/native'.
+  typescript: npm:@typescript/typescript6@6.0.2
+  # undici 8.x requires Node.js >=22.19.0, above pnpm's supported floor of
+  # Node.js >=22.13.
+  undici: ^7.30.1
+  enhanced-resolve: 5.27.0
+catalogs:
+  # The runtime dependencies of get-pnpm, which npx and pnpm/setup install from
+  # its published manifest. Exact, so an installer that verifies what it
+  # downloads does not take a new release of its own dependencies unreviewed.
+  get-pnpm:
+    confbox: 0.3.2
+    picomatch: 4.0.7
+    semver: 7.8.6
+
+catalogMode: strict
+
+catalogPrune: true
+
+# Dependencies deliberately held back, which `pnpm update --latest` (run by the
+# update-lockfile workflow) would otherwise bump. Most of them are packages
+# whose newer versions require a Node.js version above pnpm's supported floor
+# (>=22.13); the comment at each catalog entry above records the reason.
+# typescript is held on 6.x because typescript-eslint does not support the
+# TypeScript 7.0 API yet.
+# pnpm-v11 is the published pnpm v11 that the Rust tests compare against; bump
+# it to the newest v11 release by hand.
+# The rusqlite crate is held on 0.39: from 0.41 its bundled SQLite collides
+# with libsql-ffi's copy when both link into one binary.
+update:
+  ignoreDeps:
+    - '@types/node'
+    - '@yarnpkg/core'
+    - cspell
+    - eslint-plugin-regexp
+    - node-gyp
+    - npm-packlist
+    - pnpm-v11
+    - rusqlite
+    - typescript
+    - undici

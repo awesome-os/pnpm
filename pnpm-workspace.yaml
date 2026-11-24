@@ -1,0 +1,82 @@
+packages:
+  - pnpm/crates/deps-restorer/pnp-runtime
+  - pnpm/npm/get-pnpm
+  - pnpm/npm/napi
+  - pnpm/esm-loader
+  - pnpm/npm/pnpm
+  - pnpm/tasks/registry-mock
+  - pnpm/test-oracles
+  - pnpm/tasks/ecosystem-e2e/webcontainer
+  - pnpm/wasm
+  - pnpr/npm/pnpr
+  - pnpr/npm/pnpr-ui
+  - '!vendor/**'
+  - '!bench-work-env/**'
+  - '!**/example/**'
+  - '!**/test/**'
+
+include:
+  ./.config/pnpm/policies.yaml:
+    - allowBuilds
+    - auditConfig
+    - minimumReleaseAge
+    - minimumReleaseAgeExclude
+    - minimumReleaseAgeExcludePrune
+    - overrides
+    - packageExtensions
+    - registries
+    - trustPolicy
+    - trustPolicyExclude
+    - trustPolicyExcludePrune
+    - trustPolicyIgnoreAfter
+  ./.config/pnpm/patches/patches.yaml:
+    - patchedDependencies
+    - patchesDir
+  ./.config/pnpm/catalog.yaml:
+    - catalogMode
+    - catalogPrune
+    - catalogs
+    - update
+  ./.config/pnpm/tasks.yaml:
+    - concurrencyGroups
+    - pipelines
+    - tasks
+
+# Native workspace release management (consumed by `pnpm change` / `pnpm version -r`).
+versioning:
+  # Groups that always release together at one shared version:
+  #   - the Rust CLI wrapper and its NAPI addon;
+  #   - the pnpr wrapper and the web UI it serves.
+  fixed:
+    - [ 'pnpm', '@pnpm/napi' ]
+    - [ '@pnpm/pnpr', '@pnpm/pnpr-ui' ]
+  lanes:
+    '@pnpm/pnpr': alpha
+    '@pnpm/pnpr-ui': alpha
+
+cargo:
+  enabled: true
+
+enablePrePostScripts: false
+
+engineStrict: false
+
+gitChecks: false
+
+lockfile:
+  format: v13
+  includeResolutionSettings: true
+
+nodeVersion: 22.13.0
+
+pnpmfile: .config/pnpm/pnpmfile.cjs
+
+publishBranch: main
+
+resolutionMode: lowest-direct
+
+savePrefix: ''
+
+virtualStoreType: global
+
+autoDedupe: true

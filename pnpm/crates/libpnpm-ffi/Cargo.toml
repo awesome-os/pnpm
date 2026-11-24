@@ -1,0 +1,22 @@
+[package]
+name = "libpnpm-ffi"
+description = "B8G_ABI_MAGIC_V3 C-ABI shared library for pnpm CAS store and configuration"
+version = "0.0.1"
+publish = false
+authors.workspace = true
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+name = "libpnpm_ffi"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pnpm-config = { workspace = true }
+pnpm-store-dir = { workspace = true }
+
+[lints]
+workspace = true
