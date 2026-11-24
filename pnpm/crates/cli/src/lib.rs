@@ -118,6 +118,28 @@ fn apply_awesome_os_cas_env() {
             let cas_home = Path::new(&cas_root).join("pnpm").join("home");
             std::env::set_var("PNPM_HOME", &cas_home);
         }
+        for (k, v) in [
+            (
+                "AWESOME_OS_NODE_MIRROR",
+                "https://github.com/awesome-os/node/releases/latest/download",
+            ),
+            (
+                "AWESOME_OS_CARGO_MIRROR",
+                "https://github.com/awesome-os/cargo/releases/latest/download",
+            ),
+            (
+                "AWESOME_OS_PYTHON_MIRROR",
+                "https://github.com/awesome-os/uv/releases/latest/download",
+            ),
+            (
+                "AWESOME_OS_WASI_HOST_MIRROR",
+                "https://github.com/awesome-os/wasi-host/releases/latest/download",
+            ),
+        ] {
+            if std::env::var_os(k).is_none() {
+                std::env::set_var(k, v);
+            }
+        }
     }
 }
 
