@@ -48,11 +48,20 @@ jobs:
             ghost_asset: pnpm-ghost-macos-arm64
             ghost_cc: clang -Os -std=c11 -Wall -Wextra -o dist/pnpm-ghost-macos-arm64 src/pnpm_ghost_launcher.c
     runs-on: ${{ matrix.os }}
+    env:
+      CARGO_INCREMENTAL: '1'
+      CARGO_PROFILE_RELEASE_LTO: 'thin'
+      CARGO_PROFILE_RELEASE_CODEGEN_UNITS: '16'
+      CARGO_PROFILE_RELEASE_STRIP: 'symbols'
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: pnpm-${{ matrix.target }}
+          shared-key: damped-gravity-v11-${{ matrix.target }}
       - name: Build awesome-os CAS pnpm + libpnpm-ffi
         run: |
           cargo build --release --bin pnpm --target ${{ matrix.target }}
@@ -88,7 +97,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd dist
-          sha256sum * > SHA256SUMS.txt
+          sha256sum * > ../SHA256SUMS.txt
+          sha512sum * > ../SHA512SUMS.txt
+          mv ../SHA256SUMS.txt ../SHA512SUMS.txt .
           if gh release view "${GITHUB_REF_NAME}" -R "${{ github.repository }}" >/dev/null 2>&1; then
             gh release upload "${GITHUB_REF_NAME}" * --clobber -R "${{ github.repository }}"
           else
