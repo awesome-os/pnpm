@@ -26,3 +26,13 @@ cargo build --release --bin pnpm
 ```
 
 Licensed under the [MIT License](LICENSE).
+
+## Quick Install & Run (Windows / Linux / macOS)
+
+```sh
+# Install / hydrate from v11 CAS via holo-pm
+holo-pm install repository://github.com/awesome-os/pnpm@main
+
+# Or project & run directly via holo-project (0-byte hardlink)
+holo-project "project://rust/pnpm?from=repository://github.com/awesome-os/pnpm@main"
+```
