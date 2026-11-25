@@ -1,0 +1,183 @@
+{
+  "schema": "holo-compiler-lockfile-v1",
+  "abiMagic": "0x33564742",
+  "casLayout": "v11",
+  "repo": "awesome-os/pnpm",
+  "targets": [
+    "linux-arm64",
+    "linux-x64",
+    "macos-arm64",
+    "win64"
+  ],
+  "generatedAt": "2026-11-24T23:53:02.473Z",
+  "dependencies": [
+    {
+      "id": "awesome-os/pnpm/libpnpm-linux-arm64.so",
+      "kind": "lib",
+      "version": "v12.23.0-cas.1",
+      "target": "linux-arm64",
+      "sha512": "ba6963ac6f29ec5cd18820f03ab35a473e5304e8f218499b17e5884e8cb465b2b4ddc800dc16b83b6d428a5853f3b53ea643a372ae26a185eb9df5427f7f8dde",
+      "size": 463568,
+      "executable": false,
+      "blob": "v11/files/ba/ba6963ac6f29ec5cd18820f03ab35a473e5304e8f218499b17e5884e8cb465b2b4ddc800dc16b83b6d428a5853f3b53ea643a372ae26a185eb9df5427f7f8dde",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/libpnpm-linux-arm64.so",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/libpnpm-linux-x64.so",
+      "kind": "lib",
+      "version": "v12.23.0-cas.1",
+      "target": "linux-x64",
+      "sha512": "60f52274da3ce5a8e9f3a5e24399f8a6862aec789373611447341f021bcfd35874a724a11036bfe128aeac5ea4751f4aaa9acb5d3e7f0488dfd44dad6874c7e2",
+      "size": 428208,
+      "executable": false,
+      "blob": "v11/files/60/60f52274da3ce5a8e9f3a5e24399f8a6862aec789373611447341f021bcfd35874a724a11036bfe128aeac5ea4751f4aaa9acb5d3e7f0488dfd44dad6874c7e2",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/libpnpm-linux-x64.so",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/libpnpm-macos-arm64.dylib",
+      "kind": "lib",
+      "version": "v12.23.0-cas.1",
+      "target": "macos-arm64",
+      "sha512": "7946b7cdd42dce266d79bd5c8a514e9261d981e6a0acf84d87cae44c300dfc913803b042cf4781a37fd3e0b2b3f961b1ed0301f5d5cb03654ae1509a34345e1b",
+      "size": 667216,
+      "executable": false,
+      "blob": "v11/files/79/7946b7cdd42dce266d79bd5c8a514e9261d981e6a0acf84d87cae44c300dfc913803b042cf4781a37fd3e0b2b3f961b1ed0301f5d5cb03654ae1509a34345e1b",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/libpnpm-macos-arm64.dylib",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/libpnpm-windows-x64.dll",
+      "kind": "lib",
+      "version": "v12.23.0-cas.1",
+      "target": "win64",
+      "sha512": "6f70cbe70b5ddae386123aef7d678892556f72697ca3c98ec67617de89a9606aeaec1b235a2968c62d73dabc19dfb55d7028061ae77ba6cabf9671c9140d0bde",
+      "size": 2337280,
+      "executable": false,
+      "blob": "v11/files/6f/6f70cbe70b5ddae386123aef7d678892556f72697ca3c98ec67617de89a9606aeaec1b235a2968c62d73dabc19dfb55d7028061ae77ba6cabf9671c9140d0bde",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/libpnpm-windows-x64.dll",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/libpnpm.h",
+      "kind": "object",
+      "version": "v12.23.0-cas.1",
+      "target": "any",
+      "sha512": "903d25f2711b899450f73830d2c57a3c6104b02a5bdddade353bc9107e0f4721fd382f73ccc8226d390b275c91fbdab4ddd79609bd652272b7efd344c2d484d7",
+      "size": 1495,
+      "executable": false,
+      "blob": "v11/files/90/903d25f2711b899450f73830d2c57a3c6104b02a5bdddade353bc9107e0f4721fd382f73ccc8226d390b275c91fbdab4ddd79609bd652272b7efd344c2d484d7",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/libpnpm.h",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/pnpm-ghost-linux-arm64",
+      "kind": "ghost-launcher",
+      "version": "v12.23.0-cas.1",
+      "target": "linux-arm64",
+      "sha512": "afa673a9a64c6ee2356d8887426fa4dbabc83d46d911cf8cd039c05ec521df8c655fdfab06790d8a52a75823600428434aaef72ec21a39ae330f9002e326e07b",
+      "size": 67496,
+      "executable": true,
+      "blob": "v11/files/af/afa673a9a64c6ee2356d8887426fa4dbabc83d46d911cf8cd039c05ec521df8c655fdfab06790d8a52a75823600428434aaef72ec21a39ae330f9002e326e07b-exec",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/pnpm-ghost-linux-arm64",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/pnpm-ghost-linux-x64",
+      "kind": "ghost-launcher",
+      "version": "v12.23.0-cas.1",
+      "target": "linux-x64",
+      "sha512": "eba6ee65a5264096b3bedf9e0c0e556545eac1808bde9edb2199708c96e2233ce8aa6c45b5a077ecf965ab7161a0a641cf4f6726a47d113ebc518ffb4e986c7a",
+      "size": 14464,
+      "executable": true,
+      "blob": "v11/files/eb/eba6ee65a5264096b3bedf9e0c0e556545eac1808bde9edb2199708c96e2233ce8aa6c45b5a077ecf965ab7161a0a641cf4f6726a47d113ebc518ffb4e986c7a-exec",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/pnpm-ghost-linux-x64",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/pnpm-ghost-macos-arm64",
+      "kind": "ghost-launcher",
+      "version": "v12.23.0-cas.1",
+      "target": "macos-arm64",
+      "sha512": "d830df2e033e64150e29de99a16b30f901d7940f2e2b0a9d3d02d6dad2063cc8dc64f053a0eefa7c39c3120c60458e6725949b7da64cd0f7e9b3c7683e8b7202",
+      "size": 34568,
+      "executable": true,
+      "blob": "v11/files/d8/d830df2e033e64150e29de99a16b30f901d7940f2e2b0a9d3d02d6dad2063cc8dc64f053a0eefa7c39c3120c60458e6725949b7da64cd0f7e9b3c7683e8b7202-exec",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/pnpm-ghost-macos-arm64",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/pnpm-ghost-windows-x64.exe",
+      "kind": "ghost-launcher",
+      "version": "v12.23.0-cas.1",
+      "target": "win64",
+      "sha512": "6b3a4c158e07c3fbc75a8d9c0cdc2de644caeef9b9b1c401f9bd2fd4e8bd6794708ecbbe6110873e8e798cda225d0886f5292ed41bc00579589d765ed37a68b5",
+      "size": 154624,
+      "executable": true,
+      "blob": "v11/files/6b/6b3a4c158e07c3fbc75a8d9c0cdc2de644caeef9b9b1c401f9bd2fd4e8bd6794708ecbbe6110873e8e798cda225d0886f5292ed41bc00579589d765ed37a68b5-exec",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/pnpm-ghost-windows-x64.exe",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/pnpm-linux-arm64",
+      "kind": "bin",
+      "version": "v12.23.0-cas.1",
+      "target": "linux-arm64",
+      "sha512": "fabfc82ebd81f5849db1fbfc602fae41f3f2a7ad1fd8a3feabc214353e9ec673d6019a0cebf761b0d11b79573e16a45732299baf9ad1bb2d069581c75a4d5bc7",
+      "size": 49170696,
+      "executable": true,
+      "blob": "v11/files/fa/fabfc82ebd81f5849db1fbfc602fae41f3f2a7ad1fd8a3feabc214353e9ec673d6019a0cebf761b0d11b79573e16a45732299baf9ad1bb2d069581c75a4d5bc7-exec",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/pnpm-linux-arm64",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/pnpm-linux-x64",
+      "kind": "bin",
+      "version": "v12.23.0-cas.1",
+      "target": "linux-x64",
+      "sha512": "5afc33dfc022d87ab1cc580563848d512fb7a45e05a9e70694ae958dcdb2ed882081335b2d25938acfee4c7caabf8d56317163bc940f61748d2f904c711aa6fc",
+      "size": 60142288,
+      "executable": true,
+      "blob": "v11/files/5a/5afc33dfc022d87ab1cc580563848d512fb7a45e05a9e70694ae958dcdb2ed882081335b2d25938acfee4c7caabf8d56317163bc940f61748d2f904c711aa6fc-exec",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/pnpm-linux-x64",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/pnpm-macos-arm64",
+      "kind": "bin",
+      "version": "v12.23.0-cas.1",
+      "target": "macos-arm64",
+      "sha512": "7b7cc62ea336dd4993570a156b1a60c7c1a92b27b6540f364acead7469071b393c8f19f536a87d4ff1d7dc1941d3f6dede3a475419e770610fbfc475f26206fc",
+      "size": 45454304,
+      "executable": true,
+      "blob": "v11/files/7b/7b7cc62ea336dd4993570a156b1a60c7c1a92b27b6540f364acead7469071b393c8f19f536a87d4ff1d7dc1941d3f6dede3a475419e770610fbfc475f26206fc-exec",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/pnpm-macos-arm64",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/pnpm-windows-x64.exe",
+      "kind": "bin",
+      "version": "v12.23.0-cas.1",
+      "target": "win64",
+      "sha512": "b82527299f21ddbee615800bb2e58dfa936957a7db07bbc76459f59f70f56e5465d500ce771e3c3977745eb192bcc9619c004cd6f2857cf0bddd099d0fa2597b",
+      "size": 54628864,
+      "executable": true,
+      "blob": "v11/files/b8/b82527299f21ddbee615800bb2e58dfa936957a7db07bbc76459f59f70f56e5465d500ce771e3c3977745eb192bcc9619c004cd6f2857cf0bddd099d0fa2597b-exec",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/pnpm-windows-x64.exe",
+      "dependencies": []
+    },
+    {
+      "id": "awesome-os/pnpm/SHA256SUMS.txt",
+      "kind": "object",
+      "version": "v12.23.0-cas.1",
+      "target": "any",
+      "sha512": "1469d6c8e72b8ab94e9ba08d28def83421100646d5efcc4d57508df401064908100cbc47cc52b055d03e601f75e706fb9d7449f7b91d6029d3d8e0a78904bd29",
+      "size": 1126,
+      "executable": false,
+      "blob": "v11/files/14/1469d6c8e72b8ab94e9ba08d28def83421100646d5efcc4d57508df401064908100cbc47cc52b055d03e601f75e706fb9d7449f7b91d6029d3d8e0a78904bd29",
+      "url": "https://github.com/awesome-os/pnpm/releases/download/v12.23.0-cas.1/SHA256SUMS.txt",
+      "dependencies": []
+    }
+  ]
+}
